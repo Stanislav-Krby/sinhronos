@@ -1,0 +1,309 @@
+/* =========================
+   1) TOKENS (5 COLORS)
+   ========================= */
+:root{
+  --c-black: #000000;
+  --c-white: #ffffff;
+  --c-gray:  #818181;
+
+  --c-accent-1: #FC665B; /* pink */
+  --c-accent-2: #FF9B05; /* yellow */
+
+  --header-h: 4rem;
+  --z-header: 10; 
+}
+
+/* =========================
+   2) FONTS (Montserrat)
+   ========================= */
+/* Поменяй пути/расширения под реальные файлы в /static/fonts/ */
+@font-face{
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================
+   3) BASE
+   ========================= */
+html, body{
+  margin: 0;
+  padding: 0;
+  background-color: var(--c-white);
+  color: var(--c-black);
+}
+
+body{
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+}
+
+a{ color: inherit; text-decoration: none; }
+
+/* =========================
+   4) LAYOUT
+   ========================= */
+#gallerydeluxe{
+  margin-top: 0;
+  padding-top: var(--header-h);
+  background-color: var(--c-white);
+}
+.gd-figure{
+  padding-bottom: 3.2rem;
+  z-index: 1;
+
+  top: var(--header-h) !important;
+}
+
+/* =========================
+   5) HEADER / LOGO / NAV
+   ========================= */
+.site-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  background: var(--c-white);
+  z-index: var(--z-header);
+}
+
+/* контейнер логотипа + меню */
+#gallerydeluxe > .logo{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: var(--c-white);
+  z-index: var(--z-header);
+}
+
+
+/* логотипный блок */
+.site-brand{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* размер SVG логотипа (меняй здесь, а не в SVG) */
+.site-brand svg{
+  height: 13rem;
+  width: auto;
+  display: block;
+}
+
+/* =========================
+   6) SVG LOGO COLORS (2 fills)
+   Логика: primary/secondary из палитры сайта
+   ========================= */
+.logo-fill-primary{ fill: var(--c-black); }
+.logo-fill-secondary{ fill: var(--c-gray); }
+
+/* если нужно раскрашивать не только лого, но и UI-элементы */
+.u-text-black{ color: var(--c-black); }
+.u-text-gray{ color: var(--c-gray); }
+.u-text-accent-1{ color: var(--c-accent-1); }
+.u-text-accent-2{ color: var(--c-accent-2); }
+
+/* =========================
+   7) GalleryDeluxe (минимум нужного)
+   ========================= */
+#gallerydeluxe{
+  background-color: var(--c-white);
+  padding-top: var(--header-h);
+}
+   
+.gd-figure:hover{
+  filter: brightness(1.25);
+  cursor: pointer;
+}
+.gd-figure{
+  border-radius: 12px;
+  overflow: visible; /* важно: подпись будет ниже картинки */
+  position: relative;
+}
+
+.gd-figure img,
+.gd-modal-target{
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+}
+.gd-grid-caption{
+  position: static;
+  margin-top: 0.6rem;
+  text-align: center;
+  color: var(--c-black);
+  font-family: inherit;
+  line-height: 1.25;
+  pointer-events: none;
+}
+
+
+  text-align: center;
+  color: var(--c-black);
+  font-family: inherit;
+  line-height: 1.25;
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+
+.gd-grid-caption > div{
+  margin-top: 0.2rem;
+}
+
+
+.gd-modal-target{
+  width: 300px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.gd-modal-target:hover{ opacity: 0.7; }
+
+.gd-modal{
+  display: none;
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.gd-modal-content-wrapper{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.gd-modal-content{
+  max-width: 100%;
+  max-height: 100%;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  object-fit: contain;
+}
+.gd-modal-video{
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+}
+
+
+.gd-modal-content.gd-modal-thumbnail{
+  backdrop-filter: blur(5px);
+  transition: opacity 0.75s ease;
+  z-index: 10;
+  opacity: 1;
+}
+.gd-modal-content.gd-modal-loaded.gd-modal-thumbnail{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gd-modal-exif{
+  position: absolute;
+  z-index: 20;
+  bottom: 10px;
+  right: 10px;
+  color: var(--c-white);
+  background-color: var(--c-gray);
+  padding: 0.75rem;
+  opacity: 0.75;
+  var(--c-gray)}
+.gd-modal-exif-ontimeout{
+  transition: opacity 2s ease-out;
+  opacity: 0;
+}
+.gd-modal-exif:hover{
+  opacity: 1;
+  cursor: pointer;
+}
+.gd-modal-exif dl dd{ display: inline; margin: 0; }
+.gd-modal-exif dl dd:after{ display: block; content: ""; }
+.gd-modal-exif dl dt{ display: inline-block; min-width: 100px; }
+
+.gd-modal-close{
+  position: absolute;
+  z-index: 20;
+  top: 0px;
+  right: 10px;
+  color: var(--c-gray);
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.gd-modal-close:hover,
+.gd-modal-close:focus{
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-device-width: 800px){
+  .gd-modal-close{ font-size: 45px; }
+}
+
+#gallerydeluxe{
+  --gd-space-between: 100;
+}
+.gd-caption{
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--c-black);
+  font-family: inherit;
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.gd-caption > div{
+  margin-top: 0.25rem;
+}

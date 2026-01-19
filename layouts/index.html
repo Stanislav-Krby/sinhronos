@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, 
+          initial-scale=1.0" />
+    <title>{{ .Title }}</title>
+    <link rel="icon" href="favicon.svg" />
+    {{ partial "gallerydeluxe/head.html" . }}
+    {{ partial "head.html" . }}
+  </head>
+  {{/* init.hmlt takes either a slice of .images or a .sourcePath that points to a bundle with images.
+    An .id will be calculated if not provided. This will be used to create the URL to the data file.
+  */}}
+  {{ $bundle := site.GetPage "images" }}
+  {{ $images := $bundle.Resources.ByType "image" }}
+  {{ $gallery := partial "gallerydeluxe/init.html" (dict "sourcePath" "images") }}
+  {{ $params := site.Params.gallerydeluxe }}
+  {{/* We currently only support 1 gallery per page, which is create4 by an element with id 'gallerydeluxe',
+    and a valid data url.
+  */}}
+   <body id="gallerydeluxe" data-gd-image-data-url="{{ $gallery.imageDataUrl }}">
+
+      <a class="logo" href="{{ site.Home.RelPermalink }}">
+       <span class="site-brand">
+        <span class="site-brand__mark">
+        {{ partial "logo.html" . }}
+        </span>
+      </span>
+     </a> 
+    <nav class="site-nav">
+     <a href="#" class="nav-item">
+      <span class="nav-bracket left">(</span>
+      <span class="nav-text">CONTACT</span>
+      <span class="nav-bracket right">)</span>
+    </a>
+  </nav>    
+    <div id="gd-modal" class="gd-modal">
+      <span id="gd-modal-close" class="gd-modal-close">&times;</span>
+      {{ if $params.enable_exif }}
+        <div id="gd-modal-exif" class="gd-modal-exif"></div>
+      {{ end }}
+    </div>
+  </body>
+</html>

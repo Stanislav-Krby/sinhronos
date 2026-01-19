@@ -1,0 +1,160 @@
+{{ $sourcePath := .sourcePath | default "images" }}
+{{ $galleryIDBase := .id | default $sourcePath }}
+{{ $galleryID := $galleryIDBase | hash.FNV32a }}
+
+{{ $imageDataUrl := "" }}
+{{ $s := slice }}
+{{ $params := site.Params.gallerydeluxe }}
+
+
+       {{/* --- CSV-driven gallery (youtube + images) --- */}}
+{{ $csvPath := "sinhronos_mediafiles.csv" }} {{/* файл лежит в /assets */}}
+{{ if ne $csvPath "sinhronos_mediafiles.csv" }}
+  {{ errorf "gallerydeluxe: CSV path is locked. Expected sinhronos_mediafiles.csv, got: %s" $csvPath }}
+{{ end }}
+
+{{ $csvRes := resources.Get $csvPath }}
+{{ if not $csvRes }}
+  {{ errorf "gallerydeluxe: CSV not found in /assets: %s" $csvPath }}
+{{ end }}
+{{ $rows := $csvRes | transform.Unmarshal (dict "delimiter" ";") }}
+{{ if lt (len $rows) 2 }}
+  {{ errorf "gallerydeluxe: CSV seems empty or missing header: %s" $csvPath }}
+{{ end }}
+
+{{/* items -> sort by order */}}
+{{ $items := slice }}
+{{ range $i, $row := $rows }}
+  {{ if gt $i 0 }}
+    {{ $items = $items | append (dict
+    "order" (int (index $row 0))
+    "type" ((index $row 1) | strings.TrimSpace | lower)
+    "id" ((index $row 2) | strings.TrimSpace)
+    "project_name" (index $row 3)
+    "track_name" (index $row 4)
+
+    "caption_1" (index $row 5)
+    "caption_2" (index $row 6)
+    "caption_3" (index $row 7)
+
+    "w" (int (index $row 8))
+    "h" (int (index $row 9))
+    "tag1" (index $row 10)
+    "tag2" (index $row 11)
+    "tag3" (index $row 12)
+  ) }}
+
+
+  {{ end }}
+{{ end }}
+{{ $items = sort $items "order" "asc" }}
+
+{{/* We need a bundle to resolve image resources from (your /images bundle) */}}
+{{ $gallery := site.GetPage $sourcePath }}
+{{ if not $gallery }}
+  {{ errorf "gallerydeluxe: sourcePath page not found: %s" $sourcePath }}
+{{ end }}
+{{ range $items }}
+  {{ $t := .type }}
+  {{ $id := .id }}
+  {{ $item := . }}
+
+  {{ $idImg := $id | strings.TrimSpace | lower }}
+  {{ if eq $t "youtube" }}
+    {{ $ytid := $id | strings.TrimSpace }}
+    {{ $ytthumb := printf "https://img.youtube.com/vi/%s/maxresdefault.jpg" $ytid }}
+      {{ $w := int (index $item "w") }}
+      {{ $h := int (index $item "h") }}
+
+    {{ $m := dict
+      "name" (printf "youtube-%s" $ytid)
+      "full" $ytthumb
+      "exif" (dict)
+      "width"  $w
+      "height" $h
+      "colors" (slice)
+      "20" $ytthumb
+      "100" $ytthumb
+      "250" $ytthumb
+      "500" $ytthumb
+      "youtube" $ytid
+
+      "type" $t
+      "project_name" .project_name
+      "track_name" .track_name
+      "tag1" .tag1
+      "tag2" .tag2
+      "tag3" .tag3
+      "caption_1" .caption_1
+      "caption_2" .caption_2
+      "caption_3" .caption_3
+
+    }}
+    {{ $s = $s | append $m }}
+    {{ else if or (eq $t "image") (eq $t "img") }}
+    {{ $pattern := printf "**/%s" $idImg }}
+    
+{{ if not (in $idImg ".") }}
+  {{ $pattern = printf "**/%s.*" $idImg }}
+{{ end }}
+
+{{ $img := $gallery.Resources.GetMatch $pattern }}
+
+{{ with $img }}
+  {{ if eq .MediaType.MainType "image" }}
+    {{ $thumbs := partial "gallerydeluxe/create-thumbs.html" . }}
+    {{ $full := $thumbs.full }}
+    {{ $20 := (index $thumbs "20") }}
+    {{ $colors := slice }}
+    {{ if (ge hugo.Version "0.104") }}
+      {{ $colors = $20.Colors }}
+    {{ end }}
+
+    {{ $m := dict
+      "name" .Name
+      "full" $full.RelPermalink
+      "exif" (dict)
+      "width" $full.Width
+      "height" $full.Height
+      "colors" $colors
+      "20" $20.RelPermalink
+      "100" (index $thumbs "100").RelPermalink
+      "250" (index $thumbs "250").RelPermalink
+      "500" (index $thumbs "500").RelPermalink
+
+      "type" "image"
+
+      "project_name" $item.project_name
+      "track_name" $item.track_name
+      "tag1" $item.tag1
+      "tag2" $item.tag2
+      "tag3" $item.tag3
+      "caption_1" $item.caption_1
+      "caption_2" $item.caption_2
+      "caption_3" $item.caption_3
+
+    }}
+    {{ $s = $s | append $m }}
+  {{ else }}
+    {{ warnf "gallerydeluxe: SKIP item. Matched non-image resource for id '%s' (pattern: %s): %s (%s)" $id $pattern .Name .MediaType }}
+  {{ end }}
+{{ else }}
+  {{ warnf "gallerydeluxe: SKIP item. Image '%s' not found in bundle '%s' (pattern: %s, CSV: %s)" $id $sourcePath $pattern $csvPath }}
+{{ end }}
+
+  {{ else }}
+    {{ errorf "gallerydeluxe: Unknown type '%s' in CSV (%s). Supported: youtube, image" $t $csvPath }}
+  {{ end }}
+{{ end }}
+
+{{/* Build JSON resource */}}
+{{ $r := $s | jsonify | resources.FromString (printf "%d-gallery.json" $galleryID ) }}
+{{ if hugo.IsProduction }}
+  {{ $r = $r | minify | fingerprint }}
+{{ end }}
+{{ $imageDataUrl = $r.RelPermalink }}
+
+{{ return (dict
+  "imageDataUrl" $imageDataUrl
+  )
+}}
