@@ -331,9 +331,28 @@ let GalleryDeluxe = {
 				return ` background: linear-gradient(15deg, ${first}, ${second});`;
 			},
 		};
-
 		const pig = new Pig(imageData, options);
-pig.enable();
+		pig.enable();
+
+// Expose internals for SINHRONOS tag filtering
+if (typeof window !== "undefined") {
+  window.__GD = window.__GD || {};
+  window.__GD.pig = pig;
+  window.__GD.allImages = pig.images.slice(); // ProgressiveImage[]
+  window.__GD.images = images;               // raw items (tag1-tag3, name)
+  window.__GD.imagesMap = imagesMap;
+  window.__GD.container = container;
+}
+
+			// Expose internals for SINHRONOS tag filtering
+			if (typeof window !== 'undefined') {
+			window.__GD = window.__GD || {};
+			window.__GD.pig = pig;
+			window.__GD.allImages = pig.images.slice(); // ProgressiveImage[]
+			window.__GD.images = images;               // raw items (tag1-tag3, name)
+			window.__GD.imagesMap = imagesMap;
+			window.__GD.container = container;
+			}
 
 const renderGridCaptions = () => {
   const figures = container.querySelectorAll('.gd-figure');
