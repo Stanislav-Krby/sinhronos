@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ .Title }}</title>
 
-    {{ partial "head.html" . }}
     {{ block "head" . }}{{ end }}
+    {{ partial "head.html" . }}
   </head>
 
   <body class="{{ if .IsHome }}is-home{{ end }}">
@@ -26,88 +26,91 @@
       {{ block "main" . }}{{ end }}
     </main>
 
+    <!-- Mobile menu toggle (works on all pages) -->
+    <script>
+    (function () {
+      const menuBtn = document.querySelector(".menu-toggle");
+      if (!menuBtn) return;
+
+      menuBtn.addEventListener("click", function () {
+        const open = document.body.classList.toggle("nav-open");
+        menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    })();
+    </script>
+
     {{ if .IsHome }}
-   <script>
-(function () {
-  const gallery = document.getElementById("gallerydeluxe");
-  if (!gallery) return;
+    <script>
+    (function () {
+      const gallery = document.getElementById("gallerydeluxe");
+      if (!gallery) return;
 
-  function norm(s){ return String(s || "").trim().toLowerCase(); }
+      function norm(s){ return String(s || "").trim().toLowerCase(); }
 
-  function applyPigFilter(selected) {
-    const GD = window.__GD;
-    if (!GD || !GD.pig || !GD.allImages || !GD.images) return;
+      function applyPigFilter(selected) {
+        const GD = window.__GD;
+        if (!GD || !GD.pig || !GD.allImages || !GD.images) return;
 
-    const pig = GD.pig;
-    const allPI = GD.allImages; // ProgressiveImage[]
-    const items = GD.images;    // raw json items
+        const pig = GD.pig;
+        const allPI = GD.allImages;
+        const items = GD.images;
 
-    // filename -> tags[]
-    const tagsByFilename = new Map();
-    items.forEach((it) => {
-      const tags = [norm(it.tag1), norm(it.tag2), norm(it.tag3)].filter(Boolean);
-      tagsByFilename.set(it.name, tags);
-    });
-
-    // allowed filenames
-    const allowed = new Set();
-    if (selected === "all") {
-      items.forEach((it) => allowed.add(it.name));
-    } else {
-      items.forEach((it) => {
-        const tags = tagsByFilename.get(it.name) || [];
-        if (tags.includes(selected)) allowed.add(it.name);
-      });
-    }
-
-    // hide removed images immediately (если уже в DOM)
-    allPI.forEach((pi) => {
-      if (!allowed.has(pi.filename) && pi.existsOnPage) {
-        pi.hide();
-      }
-    });
-
-    // swap pig.images to only allowed
-    pig.images = allPI.filter((pi) => allowed.has(pi.filename));
-
-    // recompute + relayout
-    pig._computeLayout();
-    pig._doLayout();
-
-    // captions in GD обновляются на resize
-    window.dispatchEvent(new Event("resize"));
-  }
-
-  // wait until GalleryDeluxe created pig
-  let attempts = 0;
-  const t = setInterval(() => {
-    attempts++;
-    if (window.__GD && window.__GD.pig && window.__GD.allImages && window.__GD.images) {
-      clearInterval(t);
-
-      // bind clicks
-      document.querySelectorAll(".tagbar .tag").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          e.preventDefault();
-
-          document.querySelectorAll(".tagbar .tag")
-            .forEach((x) => x.classList.remove("is-active"));
-          btn.classList.add("is-active");
-
-          const selected = (btn.dataset.tag || "all").toLowerCase();
-          applyPigFilter(selected);
+        const tagsByFilename = new Map();
+        items.forEach((it) => {
+          const tags = [norm(it.tag1), norm(it.tag2), norm(it.tag3)].filter(Boolean);
+          tagsByFilename.set(it.name, tags);
         });
-      });
 
-      // initial
-      applyPigFilter("all");
-    }
+        const allowed = new Set();
+        if (selected === "all") {
+          items.forEach((it) => allowed.add(it.name));
+        } else {
+          items.forEach((it) => {
+            const tags = tagsByFilename.get(it.name) || [];
+            if (tags.includes(selected)) allowed.add(it.name);
+          });
+        }
 
-    if (attempts > 300) clearInterval(t);
-  }, 50);
+        allPI.forEach((pi) => {
+          if (!allowed.has(pi.filename) && pi.existsOnPage) {
+            pi.hide();
+          }
+        });
 
-})();
-</script>
+        pig.images = allPI.filter((pi) => allowed.has(pi.filename));
+        pig._computeLayout();
+        pig._doLayout();
+
+        window.dispatchEvent(new Event("resize"));
+      }
+
+      let attempts = 0;
+      const t = setInterval(() => {
+        attempts++;
+        if (window.__GD && window.__GD.pig && window.__GD.allImages && window.__GD.images) {
+          clearInterval(t);
+
+          document.querySelectorAll(".tagbar .tag").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              e.preventDefault();
+
+              document.querySelectorAll(".tagbar .tag")
+                .forEach((x) => x.classList.remove("is-active"));
+              btn.classList.add("is-active");
+
+              const selected = (btn.dataset.tag || "all").toLowerCase();
+              applyPigFilter(selected);
+            });
+          });
+
+          applyPigFilter("all");
+        }
+
+        if (attempts > 300) clearInterval(t);
+      }, 50);
+
+    })();
+    </script>
     {{ end }}
 
   </body>

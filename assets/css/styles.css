@@ -36,7 +36,11 @@
   --gray: #888888;
   --c-white: #ffffff;
   --c-black: #000000;
+  
+  --ui-scale: 1.1; /* +10% */
 }
+
+*{ box-sizing: border-box; }
 
 html,
 body {
@@ -64,6 +68,7 @@ body {
   justify-content: space-between;
   background: var(--c-white);
   z-index: 4000;
+  box-sizing: border-box;
 }
 
 .site-brand {
@@ -138,13 +143,16 @@ body {
 }
 
 /* ===== TAGBAR (scrolls away, compact, no borders) ===== */
-.tagbar {
-  margin-top: 64px;     /* sits under fixed header */
-  padding: 8px 28px;    /* compact */
+.tagbar{
+  margin-top: 48px;
+  padding: 0 28px;      /* убираем вертикальный padding */
+  height: 38px;         /* фиксируем высоту зоны */
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* опускаем теги вниз */
   gap: 28px;
   background: var(--c-white);
+  position: relative;
+  z-index: 3001;
 }
 
 .tag {
@@ -170,7 +178,7 @@ body {
 
 /* ===== content offset under fixed header only ===== */
 main {
-  padding-top: 64px;
+  padding-top: 0px;
 }
 
 /* MOBILE */
@@ -229,4 +237,19 @@ body:not(.is-home) .page-content hr{
   #gallerydeluxe figure.gd-figure{
     transition: none;
   }
+}
+
+.site-header .nav-link,
+.tagbar .tag,
+.site-brand .brand-text{
+  font-size: calc(1rem * var(--ui-scale));
+}
+
+body.is-home {
+  padding-top: 0px;
+}
+
+/* GalleryDeluxe container reset */
+#gallerydeluxe{
+  padding-top: 0 !important;
 }
