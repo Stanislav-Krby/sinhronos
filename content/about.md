@@ -2,31 +2,19 @@
 title: "About"
 ---
 
-## SINHRONOS DOO 
-Performing Arts & Media Studio  
-Slovenia-based studio working across film, television, and stage.
-Focused on the synchronisation of sound and image.  
+## SINHRONOS DOO (Slovenia)  
+Music & Moving Image Studio  
 
-
----
-
-### Practice
-
-Film & television scoring  
-Music direction for broadcast  
-Stage and immersive productions  
-Audio–visual performance design  
+We create music for screen and stage and youtube
 
 ---
 
 ### Team
 
-Stas Kurbatski — Composer · Music Director (Ljubljana) 
-David Todua - music soproduser (Georgia)
-Dmitry Malyshkin — Sound Engineer (Barcelona)  
-Inga Oleinikova — Children’s Performance Director (Ljubljana)  
-Alex Miro — Director of Photography  (Ljubljana) 
-
-Irina Vekshina — Communications  (Ljubljana) 
-
-
+Stas Kurbatski — Composer · Music Director  
+Jana Vidovič — Composer · Script Writer  
+David Todua — Music Co-Producer  
+Dmitry Malyshkin — Sound Engineer  
+Inga Oleinikova — Children’s Performance Director  
+Alex Miro — Director of Photography  
+Irina Vekshina — Communications  
