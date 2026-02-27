@@ -36,7 +36,7 @@
   --gray: #888888;
   --c-white: #ffffff;
   --c-black: #000000;
-  
+
   --ui-scale: 1.1; /* +10% */
 }
 
@@ -68,7 +68,6 @@ body {
   justify-content: space-between;
   background: var(--c-white);
   z-index: 4000;
-  box-sizing: border-box;
 }
 
 .site-brand {
@@ -80,19 +79,13 @@ body {
   white-space: nowrap;
 }
 
-/* logo.html helpers */
+/* brand block */
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 .brand-mark {
-  display: block;
-  width: 22px;
-  height: 22px;
-}
-
-.brand-mark-img {
   display: block;
   width: 22px;
   height: 22px;
@@ -104,9 +97,7 @@ body {
   line-height: 1;
 }
 
-.site-nav {
-  display: none;
-}
+.site-nav { display: none; }
 
 .site-actions {
   margin-left: auto;
@@ -146,17 +137,15 @@ body {
 }
 
 /* ===== Accent (only active item changes color) ===== */
-.is-active {
-  color: var(--red) !important;
-}
+.is-active { color: var(--red) !important; }
 
 /* ===== TAGBAR (scrolls away, compact, no borders) ===== */
 .tagbar{
   margin-top: 48px;
-  padding: 0 28px;      /* убираем вертикальный padding */
-  height: 38px;         /* фиксируем высоту зоны */
+  padding: 0 28px;
+  height: 38px;
   display: flex;
-  align-items: flex-end; /* опускаем теги вниз */
+  align-items: flex-end;
   gap: 28px;
   background: var(--c-white);
   position: relative;
@@ -168,7 +157,7 @@ body {
   align-items: center;
   text-decoration: none;
   color: inherit;
-  font-size: 13px;          /* +10% примерно */
+  font-size: 13px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   border: none;
@@ -182,16 +171,12 @@ body {
   color: var(--red);
 }
 
-.tag.is-active {
-  color: var(--red) !important;
-}
+.tag.is-active { color: var(--red) !important; }
 
 /* ===== content offset under fixed header only ===== */
-main {
-  padding-top: 0px;
-}
+main { padding-top: 0px; }
 
-/* MOBILE */
+/* MOBILE (hamburger kept but hidden by default) */
 .menu-toggle {
   display: none;
   border: 0;
@@ -203,9 +188,7 @@ main {
 }
 
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: inline-flex;
-  }
+  .menu-toggle { display: inline-flex; }
 
   .tagbar {
     gap: 18px;
@@ -213,16 +196,12 @@ main {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-
-  .tagbar::-webkit-scrollbar {
-    display: none;
-  }
+  .tagbar::-webkit-scrollbar { display: none; }
 }
 
 /* =========================
    Content pages layout (About/Contact)
    ========================= */
-
 body:not(.is-home) .page-content .container{
   max-width: 760px;
   margin: 0 auto;
@@ -231,7 +210,7 @@ body:not(.is-home) .page-content .container{
 
 body:not(.is-home) .page-content hr{
   border: none;
-  border-top: 1px solid var(--c-gray);
+  border-top: 1px solid var(--gray);
   margin: 48px 0;
 }
 
@@ -244,76 +223,27 @@ body:not(.is-home) .page-content hr{
 }
 
 @media (prefers-reduced-motion: reduce){
-  #gallerydeluxe figure.gd-figure{
-    transition: none;
-  }
+  #gallerydeluxe figure.gd-figure{ transition: none; }
 }
 
+/* global UI scale */
 .site-header .nav-link,
 .tagbar .tag,
 .site-brand .brand-text{
   font-size: calc(1rem * var(--ui-scale));
 }
 
-body.is-home {
-  padding-top: 0px;
-}
-
 /* GalleryDeluxe container reset */
-#gallerydeluxe{
-  padding-top: 0 !important;
-}
-/* мобилка: меньше боковые отступы у шапки */
+#gallerydeluxe{ padding-top: 0 !important; }
+
+/* ===== Mobile: hide icon, keep SINHRONOS, tighten spacing ===== */
 @media (max-width: 480px){
+  .brand-mark{ display: none; }     /* убрали иконку */
+  .brand{ gap: 0; }                /* без разрыва слева */
   .site-header{
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
   .site-actions{ gap: 12px; }
-  .brand{ gap: 8px; }
-  .brand-text{ letter-spacing: 0.02em; } /* чуть компактнее */
-}
-
-@media (max-width: 480px){
-  .brand-text{
-    display: none;
-  }
-
-  .site-header{
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .brand{
-    gap: 0;
-  }
-
-  .site-actions{
-    gap: 12px;
-  }
-}
-
-/* ===== Mobile header cleanup ===== */
-@media (max-width: 480px){
-
-  /* убрать иконку */
-  .brand-mark{
-    display: none;
-  }
-
-  /* убрать лишний gap */
-  .brand{
-    gap: 0;
-  }
-
-  /* сдвинуть шапку ближе к краю */
-  .site-header{
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  /* немного плотнее справа */
-  .site-actions{
-    gap: 12px;
-  }
+  .brand-text{ letter-spacing: 0.02em; }
 }
