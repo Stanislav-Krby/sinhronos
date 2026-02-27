@@ -121,9 +121,11 @@ body {
   text-transform: uppercase;
 }
 
+/* HOVER: unified behavior (no underline, accent color) */
 .site-actions .nav-link:hover,
 .site-actions .social-link:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: var(--red);
 }
 
 .nav-sep {
@@ -168,8 +170,10 @@ body {
   opacity: 0.9;
 }
 
+/* HOVER: accent color for tags */
 .tag:hover {
   opacity: 1;
+  color: var(--red);
 }
 
 .tag.is-active {
