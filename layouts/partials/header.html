@@ -1,7 +1,10 @@
 <header class="site-header" role="banner">
   <a class="site-brand" href="{{ site.Home.RelPermalink }}" aria-label="Home">
     <span class="brand">
-      <img src="/images/logo-s.svg" alt="Sinhronos" class="brand-mark">
+      <picture class="brand-mark">
+  <source media="(max-width: 480px)" srcset="/images/logo-s_black.svg">
+  <img src="/images/logo-s.svg" alt="Sinhronos" class="brand-mark-img">
+</picture>
       <span class="brand-text">SINHRONOS</span>
     </span>
   </a>

@@ -91,6 +91,12 @@ body {
   width: 22px;
   height: 22px;
 }
+
+.brand-mark-img {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
 .brand-text {
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -266,4 +272,23 @@ body.is-home {
   .site-actions{ gap: 12px; }
   .brand{ gap: 8px; }
   .brand-text{ letter-spacing: 0.02em; } /* чуть компактнее */
+}
+
+@media (max-width: 480px){
+  .brand-text{
+    display: none;
+  }
+
+  .site-header{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .brand{
+    gap: 0;
+  }
+
+  .site-actions{
+    gap: 12px;
+  }
 }
