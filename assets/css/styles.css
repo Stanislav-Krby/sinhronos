@@ -292,3 +292,28 @@ body.is-home {
     gap: 12px;
   }
 }
+
+/* ===== Mobile header cleanup ===== */
+@media (max-width: 480px){
+
+  /* убрать иконку */
+  .brand-mark{
+    display: none;
+  }
+
+  /* убрать лишний gap */
+  .brand{
+    gap: 0;
+  }
+
+  /* сдвинуть шапку ближе к краю */
+  .site-header{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* немного плотнее справа */
+  .site-actions{
+    gap: 12px;
+  }
+}
