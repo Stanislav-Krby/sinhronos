@@ -163,15 +163,25 @@ let GalleryDeluxe = {
 					wrap.style.aspectRatio = activeImage.width / activeImage.height;
 
 					let iframe = document.createElement('iframe');
-					iframe.src = `https://www.youtube-nocookie.com/embed/${activeImage.youtube}?autoplay=1&rel=0`;
+
+					iframe.src = `https://www.youtube-nocookie.com/embed/${activeImage.youtube}?autoplay=1&rel=0&playsinline=0&fs=1`;
+
 					iframe.style.position = 'absolute';
 					iframe.style.top = '0';
 					iframe.style.left = '0';
 					iframe.style.width = '100%';
 					iframe.style.height = '100%';
+
 					iframe.frameBorder = '0';
-					iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
-					iframe.allowFullscreen = true;
+
+					// важно: fullscreen должен быть и тут, и allowfullscreen
+					iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+					iframe.setAttribute('allowfullscreen', 'true');
+
+					// iOS Safari иногда учитывает именно attribute
+					iframe.setAttribute('playsinline', 'false');
+
+					wrap.appendChild(iframe);
 
 					wrap.appendChild(iframe);
 					imageWrapper.appendChild(wrap);
