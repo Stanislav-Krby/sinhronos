@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="120.927" height="116.766" viewBox="0, 0, 120.927, 116.766">
+  <g id="LOGO_ROSE_blank_Copy" transform="translate(-62.741, -92.139)">
+    <path d="M166,134.614 L155.695,140.126 L112.402,116.962 L122.708,111.446 L166,134.614 z" fill="#000000" id="UP_OLD" display="none"/>
+    <path d="M112.473,116.966 L154.237,139.159 L164.492,133.757 L122.708,111.446 L112.473,116.966 z" fill="#FC7266" id="UP_NEW"/>
+    <path d="M143.971,166.942 L143.971,177.969 L143.969,177.969 L114.123,161.998 L114.123,150.968 L114.123,150.968 L143.971,166.942 z" fill="#FC7266"/>
+    <path d="M133.668,183.53 L123.474,189 L81.372,166.409 L91.569,160.939 L133.668,183.53 z" fill="#FC7266"/>
+    <path d="M122.903,133.504 L122.903,144.531 L102.099,133.504 L102.099,122.477 L122.903,133.504 z" fill="#FC7266"/>
+    <g id="Rullers" display="none">
+      <path d="M81.372,110.91 L164.58,110.905 L164.585,189.717 L81.378,189.723 L81.372,110.91 z" fill-opacity="0" stroke="#F42300" stroke-width="0.25"/>
+      <path d="M82.063,133.504 L123.002,111.446" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+      <g id="Border">
+        <path d="M123.362,189 L80.797,166.221" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+        <path d="M133.784,183.484 L91.218,160.706" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+      </g>
+      <g id="Border">
+        <path d="M159.362,142 L116.797,119.221" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+        <path d="M169.784,136.484 L127.218,113.706" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+      </g>
+      <path d="M123.781,189 L165,166.942" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+      <path d="M130.374,159.655 L140.576,154.116" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+      <path d="M154.38,139.241 L164.582,133.702" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+      <path d="M130.374,137.655 L140.576,132.116" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+      <path d="M113.374,172.655 L123.576,167.116" fill-opacity="0" stroke="#F42300" stroke-width="0.25" id="Ruller_1"/>
+    </g>
+  </g>
+</svg>

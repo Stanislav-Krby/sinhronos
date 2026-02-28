@@ -4,6 +4,9 @@
 {{ end }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+<link rel="apple-touch-icon" href="/favicon.svg">
+
 {{ with site.Params.plausible_domain }}
 <script defer data-domain="{{ . }}" src="https://plausible.io/js/plausible.js"></script>
 {{ end }}
