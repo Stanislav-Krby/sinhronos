@@ -337,3 +337,12 @@ body:not(.is-home) .page-content hr{
     z-index: 9999;
   }
 }
+
+/* =========================
+   GD MODAL ABOVE HEADER
+   Modal must be higher than .site-header (z-index: 4000)
+   ========================= */
+
+.gd-modal{
+  z-index: 9999 !important;
+}
