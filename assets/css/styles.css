@@ -349,36 +349,4 @@ body:not(.is-home) .page-content hr{
   z-index: 9999 !important;
 }
 
-<!-- EXIT FULLSCREEN CLOSE MODAL
-     iOS YouTube exits native fullscreen but leaves GD modal open.
-     We close the modal automatically to return to the gallery. -->
-<script>
-(function () {
-  function closeGdModalIfOpen() {
-    const modal = document.querySelector(".gd-modal");
-    if (!modal) return;
 
-    const closeBtn =
-      modal.querySelector(".gd-modal-close") ||
-      modal.querySelector("[data-gd-close]") ||
-      modal.querySelector("button");
-
-    if (closeBtn) closeBtn.click();
-  }
-
-  function onFsChange() {
-    const fsEl =
-      document.fullscreenElement ||
-      document.webkitFullscreenElement ||
-      null;
-
-    // If fullscreen ended AND GD modal is present -> close it.
-    if (!fsEl) {
-      setTimeout(closeGdModalIfOpen, 250);
-    }
-  }
-
-  document.addEventListener("fullscreenchange", onFsChange);
-  document.addEventListener("webkitfullscreenchange", onFsChange);
-})();
-</script>

@@ -115,5 +115,37 @@
     </script>
     {{ end }}
 
+    <!-- EXIT FULLSCREEN CLOSE MODAL
+        iOS YouTube exits native fullscreen but leaves GD modal open.
+        We close the modal automatically to return to the gallery. -->
+    <script>
+    (function () {
+      function closeGdModalIfOpen() {
+        const modal = document.querySelector(".gd-modal");
+        if (!modal) return;
+
+        const closeBtn =
+          modal.querySelector(".gd-modal-close") ||
+          modal.querySelector("[data-gd-close]");
+
+        if (closeBtn) closeBtn.click();
+      }
+
+      function onFsChange() {
+        const fsEl =
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          null;
+
+        if (!fsEl) {
+          setTimeout(closeGdModalIfOpen, 250);
+        }
+      }
+
+      document.addEventListener("fullscreenchange", onFsChange);
+      document.addEventListener("webkitfullscreenchange", onFsChange);
+    })();
+    </script>
+
   </body>
 </html>
