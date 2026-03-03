@@ -148,7 +148,7 @@ body {
 }
 
 .nav-sep {
-  color: var(--grey);
+  color: var(--c-grey);
   opacity: 0.6;
 }
 
@@ -163,7 +163,7 @@ body {
 
 /* ===== TAGBAR (scrolls away, compact, no borders) ===== */
 .tagbar{
-margin-top: 54px;
+  margin-top: 64px;
   padding: 0 28px;
   min-height: 44px;
   display: flex;
@@ -172,7 +172,6 @@ margin-top: 54px;
   background: var(--c-white);
   position: relative;
   z-index: 3001;
-  flex-wrap: wrap;
 }
 
 .tag {
@@ -213,9 +212,12 @@ main { padding-top: 0px; }
 @media (max-width: 768px) {
   .menu-toggle { display: inline-flex; }
 
-  .tagbar {
+   .tagbar {
     gap: 18px;
     overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    flex-wrap: nowrap;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -233,7 +235,7 @@ body:not(.is-home) .page-content .container{
 
 body:not(.is-home) .page-content hr{
   border: none;
-  border-top: 1px solid var(--grey);
+  border-top: 1px solid var(--c-grey);
   margin: 48px 0;
 }
 

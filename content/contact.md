@@ -2,12 +2,12 @@
 title: "Contact"
 ---
 
-For bookings, collaborations, and production requests:
 
 Stanislav Kurbatski
 
+
 Email  
-kurbatski@gmail.com  
+kurbatzki@gmail.com  
 +38640493599
 
 Address  

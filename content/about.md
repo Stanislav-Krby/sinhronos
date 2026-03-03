@@ -2,10 +2,10 @@
 title: "About"
 ---
 
-## SINHRONOS DOO (Slovenia)  
-Music & Moving Image Studio  
+## SINHRONOS d.o.o.
+Music & video production
 
-We create music for screen and stage and youtube
+We create music for screen, stage and youtube
 
 ---
 
