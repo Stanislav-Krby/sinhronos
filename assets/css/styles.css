@@ -33,7 +33,7 @@
 :root {
   --red: #eb7a6c;     /* accent */
   --yellow: #FF9B05;  /* keep for later */
-  --c-grey: #5f5f5f;
+  --c-grey: #969696;
   --c-white: #ffffff;
   --c-black: #000000;
 
@@ -303,15 +303,3 @@ body:not(.is-home) .page-content hr{
 .footer-sep{
   color: var(--c-grey);
 }
-
-.footer-right a{
-  text-decoration: none;
-  color: var(--c-grey);
-  transition: opacity 0.2s ease;
-}
-
-.footer-right a:hover{
-  opacity: 0.6;
-}
-
-
