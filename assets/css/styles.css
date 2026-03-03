@@ -37,8 +37,8 @@
   --c-white: #ffffff;
   --c-black: #000000;
 
-  --ui-scale: 1.1; /* +10% */
-  --ui-scale-tagbar: 1.0; /* tagbar scale (mobile tweak) */
+  --ui-scale: 1.2; /* +10% */
+  --ui-scale-tagbar: 0.9; /* tagbar scale (mobile tweak) */
 }
 
 *{ box-sizing: border-box; }
@@ -312,4 +312,28 @@ body:not(.is-home) .page-content hr{
 
 .footer-right a:hover{
   opacity: 0.6;
+}
+
+/* =========================
+   GD MOBILE VIDEO FULLSCREEN
+   Forces the video modal to fill the viewport on mobile
+   ========================= */
+
+@media (max-width: 768px){
+  .gd-modal .gd-modal-video{
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+
+    aspect-ratio: auto !important;
+    margin: 0 !important;
+    z-index: 9999;
+  }
 }
