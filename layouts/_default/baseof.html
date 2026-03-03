@@ -9,22 +9,24 @@
     {{ partial "head.html" . }}
   </head>
 
-  <body class="{{ if .IsHome }}is-home{{ end }}">
+ <body class="{{ if .IsHome }}is-home{{ end }} site-wrapper">
     {{ partial "header.html" . }}
 
-    {{ if .IsHome }}
-    <div class="tagbar">
-      <a class="tag is-active" href="#" data-tag="all">ALL</a>
-      <a class="tag" href="#" data-tag="cinematic">CINEMATIC</a>
-      <a class="tag" href="#" data-tag="design">DESIGN</a>
-      <a class="tag" href="#" data-tag="song">SONG</a>
-      <a class="tag" href="#" data-tag="stage">STAGE</a>
-    </div>
-    {{ end }}
+      {{ if eq .Kind "home" }}
+      <div class="tagbar">
+        <a class="tag is-active" href="#" data-tag="all">ALL</a>
+        <a class="tag" href="#" data-tag="branding">BRANDING</a>
+        <a class="tag" href="#" data-tag="cinematic">CINEMATIC</a>
+        <a class="tag" href="#" data-tag="live">LIVE</a>
+        <a class="tag" href="#" data-tag="pop">POP</a>
+      </div>
+      {{ end }}
 
     <main>
       {{ block "main" . }}{{ end }}
     </main>
+
+        {{ partial "footer.html" . }}
 
     <!-- Mobile menu toggle (works on all pages) -->
     <script>

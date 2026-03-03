@@ -33,11 +33,12 @@
 :root {
   --red: #eb7a6c;     /* accent */
   --yellow: #FF9B05;  /* keep for later */
-  --gray: #888888;
+  --c-grey: #5f5f5f;
   --c-white: #ffffff;
   --c-black: #000000;
 
   --ui-scale: 1.1; /* +10% */
+  --ui-scale-tagbar: 1.0; /* tagbar scale (mobile tweak) */
 }
 
 *{ box-sizing: border-box; }
@@ -53,6 +54,27 @@ body {
     Roboto, Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
+  /* =========================
+    STICKY FOOTER LAYOUT
+    Makes footer stay at bottom
+    when page content is short
+    ========================= */
+
+  .site-wrapper{
+    min-height: 100vh;        /* full viewport height */
+    display: flex;            /* enable flex layout */
+    flex-direction: column;   /* stack header / main / footer vertically */
+  }
+
+  main{
+    flex: 1 0 auto;           /* main expands and pushes footer down */
+  }
+
+  .site-footer{
+    margin-top: auto;         /* footer sticks to bottom */
+  }
+
+
 
 /* ===== NAV (fixed, always visible) ===== */
 .site-header {
@@ -126,7 +148,7 @@ body {
 }
 
 .nav-sep {
-  color: var(--gray);
+  color: var(--grey);
   opacity: 0.6;
 }
 
@@ -141,15 +163,16 @@ body {
 
 /* ===== TAGBAR (scrolls away, compact, no borders) ===== */
 .tagbar{
-  margin-top: 48px;
+margin-top: 54px;
   padding: 0 28px;
-  height: 38px;
+  min-height: 44px;
   display: flex;
-  align-items: flex-end;
-  gap: 28px;
+  align-items: center;
+  gap: 24px;
   background: var(--c-white);
   position: relative;
   z-index: 3001;
+  flex-wrap: wrap;
 }
 
 .tag {
@@ -210,7 +233,7 @@ body:not(.is-home) .page-content .container{
 
 body:not(.is-home) .page-content hr{
   border: none;
-  border-top: 1px solid var(--gray);
+  border-top: 1px solid var(--grey);
   margin: 48px 0;
 }
 
@@ -226,11 +249,15 @@ body:not(.is-home) .page-content hr{
   #gallerydeluxe figure.gd-figure{ transition: none; }
 }
 
-/* global UI scale */
+/* global UI scale (everything except tagbar) */
 .site-header .nav-link,
-.tagbar .tag,
 .site-brand .brand-text{
   font-size: calc(1rem * var(--ui-scale));
+}
+
+/* tagbar UI scale (separate control) */
+.tagbar .tag{
+  font-size: calc(1rem * var(--ui-scale) * var(--ui-scale-tagbar));
 }
 
 /* GalleryDeluxe container reset */
@@ -246,4 +273,41 @@ body:not(.is-home) .page-content hr{
   }
   .site-actions{ gap: 12px; }
   .brand-text{ letter-spacing: 0.02em; }
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.site-footer{
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  color: var(--c-grey);
+}
+
+.footer-inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.footer-left{
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.footer-sep{
+  color: var(--c-grey);
+}
+
+.footer-right a{
+  text-decoration: none;
+  color: var(--c-grey);
+  transition: opacity 0.2s ease;
+}
+
+.footer-right a:hover{
+  opacity: 0.6;
 }
